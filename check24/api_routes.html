@@ -1,0 +1,1155 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style>td.empty {background-color:white;} td {background-color:#f8f8f8;vertical-align:top}
+                * {font-family:"Open Sans", arial, sans-serif;}
+                th {text-align:left;background-color:rgb(0, 154, 215);
+                    color:white;font-size:20px;height:39px;line-height:17.1429px;padding:7px 6px;} 
+                tr.header th {background-color:black;color:white;width:100%} 
+                tr.header th.small {width: 1%;}
+                tr.red th {background-color:darkred;color:white;} 
+                td {font-family:Verdana,Arial;font-size:14px;} 
+                .classInfo, .desc {white-space: pre;}
+                .classInfo, .inner {background-color:rgb(233, 233, 233);
+                    background-origin:padding-box;
+                    border-bottom-color:rgb(221, 221, 221);
+                    border-bottom-style:solid;border-bottom-width:2px;
+                    border-collapse:separate;
+                    color:rgb(102, 102, 102);
+                    font-weight:bold;margin:0;padding: 6px 10px;}
+                .classInfo {font-size: 12px;font-weight: normal;max-width:1200px}
+                tr.param td:first-child {text-align: right;color: rgb(102, 102, 102);padding-right: 5px;}
+                tr.param.default td {color:#ccc}
+                div.inner {display:none;overflow:hidden;padding-left:5px;font-size:14px}
+                :target td {background-color: rgba(255,153,0, 0.2);}
+                div.inner table {width:70%;margin:8px}
+                div.inner table th {font-size:16px;height:22px}
+                tr.or {cursor:pointer;
+                    background-color:rgb(249, 249, 249);
+                    border-collapse:separate;
+                    box-sizing:border-box;
+                    color:rgb(51, 51, 51);
+                    font-size:12px;padding: 6px 10px 8px 10px;}
+                .or td {color: rgb(153, 153, 153);}
+                .inner td {font-size:12px;padding:4px 6px}
+                tr.in-use td {color:rgb(104, 175, 39)}
+                tr.unused td {color:rgb(194, 36, 57)}
+                h3 {color:black;font-size:20px;font-weight:bold}
+                .method {color:rgb(0, 154, 215);margin-bottom:12px}
+                .doc {color:black;margin-top:8px;font-weight:bold;}
+                .usage {overflow:auto;margin:5px 0 5px 2px;padding:5px;font-size:11px;background-color:#eee}
+                .security {color:black}
+                a.star {color:lightgray;text-decoration:none}
+                a.star:hover {color:orange;}
+                .category {color:black}
+                .deprecated {color:black;}
+                .icn {margin: 0 0 0 5px; cursor: pointer;}
+                .icn-list {white-space: nowrap}
+                .routes-console th {background-color: rgb(128, 128, 180)}
+                .search-form {float: right;font-size: 0;}
+                .search-form input, .search-form button {font-size:14px;border:1px solid #ccc;background:none;padding:5px;height:36px;margin:0}
+                .search-form input {border-right: none}
+                .search-form button {border-left: none}
+                .warning {padding: 0px 5px 5px; color: #000; width: calc(70% - 10px); background-color: #f0ad4e; margin: 10px;}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/K88pR3goAWT7BTt32Z01mxJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/RjgO7rYTmqiVp7vzi-Q5URJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/LWCjsQkB6EMdfHrEVqA1KRJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+                </style>
+                <script>
+                function showlayer(d){
+                    var innerDiv = d.nextSibling.querySelector(".inner");
+                    innerDiv.style.display = (innerDiv.style.display == "block") ? "none" : "block";
+                }
+                </script>
+                </head><body>
+                <pre> Html output of the API routes
+
+ ✋ Hand Symbol (@ category) = This route contains sensitive Personal or Booking Informations.
+ ♻ Recycling Symbol (@ deprecated) = This route is deprecated or it's action method is not implemented or has errors.
+ 🔒 Lock Symbol (@ internal) = Route is secured. Htaccess-Auth / CMS-User required.
+ 👤 Bust Symbol (@ c24-user) = Route is secured. A valid C24User Session is required.
+ ⛔ Forbidden Symbol (@ ip-range) = Route is secured. Only specified IP-Ranges are allowed.
+ 💾 Caching Symbol (@ caching) = Route is being cached for a certain or unlimited time.
+ 🔑 ApiKey Symbol = Route requires the key parameter to be set.
+</pre>
+            <h2>Routenübersicht "Api-Routen"</h2><table class="routes-api">
+                    <tbody><tr class="header">
+                        <th class="small">Note</th>
+                        <th class="small">Verb</th>
+                        <th>Route URL</th>
+                        <th>Route</th>
+                        <th>Description</th>
+                    </tr><tr>
+                            <th colspan="1" class="icn-list">  </th>
+                            <th colspan="4">Api\Controller\Hotel\SearchController</th>
+                          </tr><tr><td colspan="5" class="classInfo"> Class SearchController offers programmatic access to our search functionality.
+
+ A hotel search is a search for hotels within one city for a defined period of time for a fixed number of rooms.
+ A search can have two kinds of states, 'running' and 'finished'. When a search is started, its state is 'running'
+ and it has 0 results. As providers reply, the number of results increases.
+ As soon as all providers replied, the search status becomes 'finished'.
+ Each result has a limited lifetime since the providers only lock an offer for a certain time.
+ As soon as a result expires, its search expires.
+
+ Searches can be restarted without having at hand their parameters, the ID is sufficient.
+ Each result contains the price for the accommodation, information about breakfast and amenities as well as the URL
+ of a thumbnail.
+ It also contains a booking URL which points to our user interface for booking.
+ Alternatively, a different booking interface can be implemented using the Hotel Booking API.
+ Use the booking_api_url to get a document that describes what data the user has to provide.
+ If more detailed information about a result is needed, it can be access via a result URL.
+ This URL points to detailed descriptions, collections of image URLs and ratings from different providers.
+
+ Caching
+
+ The offers that are returned by the API can expire, so we discourage caching on the client side.
+ To minimize response time and network traffic the API supports HTTP Etags and datestamps.
+ If your network library has Etag and datestamp support, we recommend using If-None-Match- or
+ If-Modified-Since-Headers.
+ If one of the clients Etag matches the resource on the server or the resource was not updated since the last request,
+ it will send an empty reply with a 304 Not Modified status.
+ If you have both options of using If-None-Match or If-Modified-Since, we recommend using If-None-Match (Etags).
+
+ Abbreviations
+
+ M    Mandatory
+ O    Optional
+
+ @package Api\Controller\Hotel
+</td></tr><tr id="/hackatum/hotels/searches.[:format]" class="or unused" onclick="showlayer(this)"><td class="icn-list"><span class="icn unused" title="@unused Not found in logfiles">❗</span></td><td></td><td><a class="star" href="#/hackatum/hotels/searches.[:format]">🔗</a> /hackatum/hotels/searches.[:format]</td><td>proxy-hackatum/hotel-search/create</td><td class="desc">Start a Search</td></tr><tr>
+                        <td colspan="5">
+                            <div class="inner">
+                                <h3>Description of route "/hackatum/hotels/searches.[:format]"</h3>
+                                <div class="method">Class: SearchController::createAction</div><div class="doc">Documentation:</div><table>
+                            <tbody><tr>
+                                <td class="desc"> Start a Search
+
+ To start a search, you need following information:
+ A location (city, poi or hotel), an arrival date, a departure date and information about how many rooms of
+ which type are requested (see below).
+ The city_id is typically obtained using a call to /locations/cities/name/{query}.{format} (an autocompleter).
+ For different types of searches, the results differ to some extend (see below). The normal flow is to perform a
+ city-based search, let the user pick a hotel, then start a hotel-based search and let the user pick a rate.
+
+ City-based search or poi-based search:
+ These types of searches return approximate prices and availabilities and the rate-element will be null. When
+ using booking URLs from results of those searches, the booking might not be possible in some cases.
+
+ Hotel-based search:
+ This type of search returns up-to-date prices and availabilities and the rate element will contain information
+ about the type of room, the cancellation policies and the original currencies and price before the conversion to
+ Euros.
+ Also the payment type is returned, it can have the value 'prepaid' meaning the customer has to pay in advance or
+ 'hotel' meaning the customer has to pay at the hotel.
+
+ There are five types of locations you can search in. Exactly one has to be specified:
+ city_id                  Integer The city ID as obtained from the location API
+ poi_id                   Integer The poi ID as obtained from the location API
+ hotel_id                 Integer The hotel ID as obtained from the results of another search
+ hotel_ids                String  Comma separated list of Hotel IDs
+ latitude and longitude   Float   The geo coordinates to create a Search. The default <code>radius</code> is 20
+
+
+ There are three ways to define a room configuration:
+ 'room_configuration' String  'single' or 'double'
+ or:
+ 'single_rooms_count' Integer Number of single rooms
+ 'double_rooms_count' Integer Number of double rooms
+ or:
+ If you want to search with children you can pass a string of the following format:
+ Rooms are enclosed in brackets, guests are separated by pipes,
+ 'A' represents an adult guest, an integer represents a child of that specific age.
+ Example: '[A|A|3][A|12|14]' means two rooms, the first with one adult and a child of age 3, the second room with
+ a single adult and two children, age 12 and 14.
+
+ 'room_configuration' String  Room configuration with children
+ Please note that the total number of rooms can not be greater than 3.
+ Special case for POSTing with XML as parameters
+
+ If you need to supply the POST parameters as a XML document in the POST body (Details and important notes here),
+ there is a caveat: You need to supply an enclosing tag, "search", in order for the request parameters to be
+ recognized.
+ If you have an XML file in "request.xml" with the following contents:
+
+ &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+ &lt;search&gt;
+ &lt;arrival_date&gt;2011-04-26&lt;/arrival_date&gt;
+ &lt;room_configuration&gt;[A]&lt;/room_configuration&gt;
+ &lt;poi_id&gt;&lt;/poi_id&gt;
+ &lt;departure_date&gt;2011-04-29&lt;/departure_date&gt;
+ &lt;city_id&gt;40784&lt;/city_id&gt;
+ &lt;hotel_id&gt;&lt;/hotel_id&gt;
+ &lt;/search&gt;
+
+ You can start a search with:
+ curl -d @request.xml "http://apiv3.travel-iq.com/hotels/searches.xml?key=traveliq" -H "Content-Type:text/xml"
+
+ Note that you still need to supply the key parameter as part of the URL.
+
+ Responses
+ On a successful search creation, the HTTP response code will be '201 Created'.
+ The body will contain the status of the search. Status).
+
+ If the parameters are incomplete or invalid in some way, the server will respond with a '422 Unprocessable
+ Entity' status code, and the response body will contain some information about which parameter was invalid, and
+ why.
+ If the location is not found, the reply will have a '404 Not Found' status code
+
+ Examples of error messages
+
+ xml - An &lt;errors&gt; element, containing &lt;error&gt; elements with error messages. XML reply
+ json - A hash with an 'error' key, the value beeing an array of error messages. JSON reply
+
+ @route /hotels/searches(.:format)
+
+ @param CreateRequest $request
+ @throws \Exception
+ @return \Framework\View\Model\JsonXmlResponseModel
+</td>
+                            </tr>
+                          </tbody></table><div class="doc">Parameters:</div><table><tbody><tr><th>Parameter</th><th>Description</th></tr><tr class="param"><td>search</td><td class="desc"> Search term for current request.
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>arrival_date</td><td class="desc"> @Mapping(options={"format":"Y-m-d|"})
+ @var \DateTime
+</td></tr><tr class="param"><td>departure_date</td><td class="desc"> @Mapping(options={"format":"Y-m-d|"})
+ @var \DateTime
+</td></tr><tr class="param"><td>city_id</td><td class="desc"> @todo add custom validator - one is required (city_id, region_id, poi_id or hotel_id)
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>region_id</td><td class="desc"> Only used for backwards compatibility
+ @deprecated
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>poi_id</td><td class="desc"> @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>hotel_id</td><td class="desc"> @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>latitude</td><td class="desc"> @todo add custom validator for lat/lng/rad
+ @Mapping(optional=true)
+ @Validator({"name":"Float"})
+ @Validator({"name":"Between", "options":{"min":-90, "max":90}})
+ @var float
+</td></tr><tr class="param"><td>longitude</td><td class="desc"> @Mapping(optional=true)
+ @Validator({"name":"Float"})
+ @Validator({"name":"Between", "options":{"min":-180, "max":180}})
+ @var float
+</td></tr><tr class="param"><td>radius</td><td class="desc"> @Mapping(optional=true)
+ @Validator({"name":"Float"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @Validator({"name":"LessThan", "options":{"max":1000}})
+ @var float
+</td></tr><tr class="param"><td>room_configuration</td><td class="desc"> single/double/[A|A|3][A|12|14]
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param"><td>single_rooms_count</td><td class="desc"> @Mapping(optional=true)
+ @var integer
+</td></tr><tr class="param"><td>double_rooms_count</td><td class="desc"> @Mapping(optional=true)
+ @var integer
+</td></tr><tr class="param"><td>duration</td><td class="desc"> only for compat reasons because parameters service gives "duration" value
+ and some clients may generically use all parameters
+
+ @Mapping(optional=true)
+ @var int
+</td></tr><tr class="param"><td>reason</td><td class="desc"> travel reason: business vs. private
+
+ @Mapping(optional=true)
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "private",
+      "personal",
+      "business",
+      ""
+  }}})
+ @var string
+</td></tr><tr class="param"><td>hotel_ids</td><td class="desc"> comma separated list
+
+ @Mapping(optional=true)
+ @Validator({"name":"IdList"})
+ @var string
+</td></tr><tr class="param default"><td>key</td><td class="desc"> Your API key
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param default"><td>page</td><td class="desc"> The current page we want items for.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param default"><td>per_page</td><td class="desc"> Items per page.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr></tbody></table>    </div>
+                       </td>
+                     </tr><tr id="/hackatum/hotels/searches/:searchId/results.[:format]" class="or unused" onclick="showlayer(this)"><td class="icn-list"><span class="icn caching" title="@caching HotelDescriptions-Entities are being cached for unlimited time by the secondlevelcache_memcached and the rendered_entities table. If the search is hotel based.&lt;br&gt;&lt;br&gt;Returns the (remaining) cache lifetime of this request. The lifetime is being calculated dynamicly by the max&lt;br /&gt;
+ cache time and the time elapsed since the creation of this search.&lt;br /&gt;
+ A failed search or a search that's not finished is not being cached.&lt;br /&gt;
+&lt;br /&gt;
+ ">💾</span><span class="icn unused" title="@unused Not found in logfiles">❗</span></td><td></td><td><a class="star" href="#/hackatum/hotels/searches/:searchId/results.[:format]">🔗</a> /hackatum/hotels/searches/:searchId/results.[:format]</td><td>proxy-hackatum/hotel-search/search-results</td><td class="desc">Get Search Results</td></tr><tr>
+                        <td colspan="5">
+                            <div class="inner">
+                                <h3>Description of route "/hackatum/hotels/searches/:searchId/results.[:format]"</h3>
+                                <div class="method">Class: SearchController::resultsAction</div><div class="warning"><div class="doc">This route has a caching mechanism:</div>HotelDescriptions-Entities
+ are being cached for unlimited time by the secondlevelcache_memcached 
+and the rendered_entities table. If the search is hotel based.<br><br>Returns the (remaining) cache lifetime of this request. The lifetime is being calculated dynamicly by the max<br>
+ cache time and the time elapsed since the creation of this search.<br>
+ A failed search or a search that's not finished is not being cached.<br>
+<br>
+ </div><div class="doc">Documentation:</div><table>
+                            <tbody><tr>
+                                <td class="desc"> Get Search Results
+
+ <b>Normal search results</b>
+ @route /hotels/searches/:searchId/results(.:format)
+
+ Search results can be retrieved any time, also from a running search.
+ The reply consists of the searches ID, resources along with a brief status and a collection of result-elements.
+ The status indicated whether the search is running or finished.
+ The min_price and max_price save the cheapest and the expensive price of the whole search.
+
+ Also it contains the results_count, meaning the total number of results, the count of the alternative results as
+ well as the results_filtered_count, the number of results that match the filter criteria (see below).
+
+ Each result element represents an offer for one particular hotel. It includes a price, geo coordinates, the
+ address, information about breakfast, amenities and hotel themes, a thumbnail URL, the name of the hotel and the
+ provider as well as ratings.
+ The resources of a result are the search_url, the result_url to retrieve more details about the result and the
+ booking_url.
+
+
+ <b>Single Result Details</b>
+ @route /hotels/searches/:searchId/results/:offerUuid(.:format)
+ @caching HotelDescriptions-Entities are being cached for unlimited time
+ by the secondlevelcache_memcached and the rendered_entities table. If 
+the search is hotel based.
+
+ In the results collection, not all details for an offer are shown.
+ When retrieving a single result, additional details are provided (if 
+available):
+ Detailed rating from different providers, a textual description, a 
+review, descriptions of the amenities provided
+ and a collection of image URLs.
+
+ @param ResultsRequest $request
+
+ @return JsonXmlResponseModel
+</td>
+                            </tr>
+                          </tbody></table><div class="doc">Parameters:</div><table><tbody><tr><th>Parameter</th><th>Description</th></tr><tr class="param"><td>searchId</td><td class="desc"> @Mapping(optional=false,type="integer")
+ @Validator({"name":"Int"})
+ @var int
+</td></tr><tr class="param"><td>offerUuid</td><td class="desc"> @Mapping(optional=true,type="string")
+ @Validator({"name":"Uuid"})
+ @var string
+</td></tr><tr class="param"><td>result_id</td><td class="desc"> If you want to retrieve only one specific result, you can specify its ID.
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>hotel_id</td><td class="desc"> @Mapping(optional=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>detail</td><td class="desc"> @todo check for usage - it seems property isn't used at all
+ @Mapping(optional=true,type="string")
+ @Validator({"name":"InArray", "options":{"haystack":{"map"}}})
+ @var string
+</td></tr><tr class="param"><td>summary_only</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>waitingSeconds</td><td class="desc"> @Mapping(optional=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>bounds</td><td class="desc"> @Mapping(ignore=true,type="\Geokit\Bounds")
+ @var Bounds
+</td></tr><tr class="param"><td>attributeFilter</td><td class="desc"> @Mapping(ignore=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>mealFilter</td><td class="desc"> @Mapping(ignore=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>sort_by</td><td class="desc"> @Mapping(optional=true,type="string")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "price_asc",
+      "price_desc",
+      "rating_asc",
+      "rating_desc",
+      "relevance_asc",
+      "relevance_desc",
+      "popularity_asc",
+      "popularity_desc",
+      "city_asc",
+      "city_desc",
+      "railwaystation_asc",
+      "railwaystation_desc",
+      "airport_asc",
+      "airport_desc",
+      "highway_asc",
+      "highway_desc",
+      "distance_asc",
+      "distance_desc",
+      "recommendation_asc"
+  }}})
+ @var string
+</td></tr><tr class="param"><td>stars</td><td class="desc"> Allows you to get only hotels with exactly this number of stars.
+ Allowed options: -1 to 7
+ You can also provide multiple values by comma-separating them: 0,1,2
+ When providing multiple values, the order in which they are provided is irrelevant.
+ 0,1,2 works exactly like 1,0,2
+
+ Providing a -1 results in a search for hotels without any classification (Database value = NULL)
+
+ Also, a -1 can be mixed with other numbers,
+ e.g. -1,0,1 would find any hotels with 0 or 1 stars and all hotels without a classification
+
+ @Mapping(optional=true,type="string")
+ @var string
+</td></tr><tr class="param"><td>stars_min</td><td class="desc"> Allows you to get only hotels with more or equal stars than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>rating_min</td><td class="desc"> Allows you to get only hotels which are rated equally or higher on average than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>price_min</td><td class="desc"> Allows you to get only results with more or equal than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>price_max</td><td class="desc"> Allows you to get only results with less or equal than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>only_stay_included</td><td class="desc"> Allows you to get only offers which only include stay (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>breakfast_included</td><td class="desc"> Allows you to get only offers which include breakfast, half_board, full_board or all_inclusive (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_breakfast_included</td><td class="desc"> Allows you to get only offers which only include breakfast (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_half_board_included</td><td class="desc"> Allows you to get only offers which only include half_board (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_full_board_included</td><td class="desc"> Allows you to get only offers which only include full_board (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_all_inclusive_included</td><td class="desc"> Allows you to get only offers which only include all_inclusive (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>hotel_name</td><td class="desc"> Allows you to get only hotels with a part of the name matching the query
+
+ @Mapping(optional=true,type="string")
+ @var string
+</td></tr><tr class="param"><td>with_restaurant</td><td class="desc"> Allows you to get only offers from hotels which have a restaurant (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_internet</td><td class="desc"> Allows you to get only offers from hotels which provide an interwebs tube (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_gym</td><td class="desc"> Allows you to get only offers from hotels which have a gym (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_spa</td><td class="desc"> Allows you to get only offers from hotels which have a spa (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_parking</td><td class="desc"> Allows you to get only offers from hotels which have a parking place (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_pool</td><td class="desc"> Allows you to get only offers from hotels which have a swimming pool (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_wheelchair_accessible</td><td class="desc"> Allows you to get only offers from hotels which have the wheelchair accessibility (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_reception_24h</td><td class="desc"> Allows you to get only offers from hotels which have 24 hour reception (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_pets_allowed</td><td class="desc"> Allows you to get only offers from hotels which allow pets (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_babycare</td><td class="desc"> Allows you to get only offers from hotels which are notably children friendly (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>reference_distance_min</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>reference_distance_max</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>sw_lat</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>sw_lng</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>ne_lat</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>ne_lng</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>is_club_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_design_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_all_inclusive_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_family_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_castle_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_beach_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_wellness_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_winter_sport_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_sport_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_romantic_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_business_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_conference_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_bed_breakfast</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_gasthaus_pension</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_hostel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_apartment</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>providers</td><td class="desc"> provider ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>c24_room_id</td><td class="desc"> Room Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>room_types</td><td class="desc"> Room Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>bed_types</td><td class="desc"> Bed Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>cancellable</td><td class="desc"> @Mapping(optional=true,type="string[]")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "cancellable_available",
+      "cancellable_nocharge",
+      "cancellable_nocharge_untilcheckin",
+      "cancellable_not_available"
+  }}})
+ @var string[]
+</td></tr><tr class="param"><td>credit_card_required</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @Validator({"name":"Boolean"})
+ @var boolean
+</td></tr><tr class="param"><td>paymentTypes</td><td class="desc"> @Mapping(optional=true,type="string[]")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "american_express",
+      "master",
+      "visa",
+      "invoice",
+      "prepaid",
+      "postpay"
+  }}})
+ @var string[]
+</td></tr><tr class="param"><td>cs_code</td><td class="desc"> @var string
+ @Mapping(optional=true,type="string")
+</td></tr><tr class="param default"><td>key</td><td class="desc"> Your API key
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param default"><td>page</td><td class="desc"> The current page we want items for.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param default"><td>per_page</td><td class="desc"> Items per page.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param"><td>full</td><td class="desc"> special flag to return all hotel descriptions with response
+
+ @Mapping(optional=true,type="bool")
+ @var bool
+</td></tr><tr class="param"><td>additional_information</td><td class="desc">
+ Same as $full.
+ It shows, how many hotels in this city or region. If hotel_name is 
+used, it will show, how many hotels are found in this city or region.
+ If there is no available hotels and hotel_name is used, API will return
+ the hotels, which you search.
+
+ Displays more informations for current request. Depending on request we
+ either need $full or $additional_information but we won't create a new
+ Trait wich contains $reference_lat, $reference_lng and $full. So we 
+just
+ ignore the other flag because we don't use it and hey, it's optional ;)
+
+ @Mapping(optional=true,type="bool")
+ @var bool
+</td></tr><tr class="param"><td>reference_lat</td><td class="desc"> Calculate the distance to point of interests if provided. For example
+ the distance to next airport.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>reference_lng</td><td class="desc"> Calculate the distance to point of interests if provided. For example
+ the distance to next airport.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr></tbody></table>    </div>
+                       </td>
+                     </tr><tr id="/hackatum/hotels/searches/:searchId/offers.[:format]" class="or unused" onclick="showlayer(this)"><td class="icn-list"><span class="icn caching" title="@caching HotelDescriptions-Entities are being cached for unlimited time by the secondlevelcache_memcached and the rendered_entities table. If the search is hotel based.&lt;br&gt;This response includes an offer which is being cached for 2 hours by the offercache_memcached.&lt;br&gt;&lt;br&gt;Returns the (remaining) cache lifetime of this request. The lifetime is being calculated dynamicly by the max&lt;br /&gt;
+ cache time and the time elapsed since the creation of this search.&lt;br /&gt;
+ A failed search or a search that's not finished is not being cached.&lt;br /&gt;
+&lt;br /&gt;
+ ">💾</span><span class="icn unused" title="@unused Not found in logfiles">❗</span></td><td></td><td><a class="star" href="#/hackatum/hotels/searches/:searchId/offers.[:format]">🔗</a> /hackatum/hotels/searches/:searchId/offers.[:format]</td><td>proxy-hackatum/hotel-search/search-results-compact</td><td class="desc">Get Search Results (optimized version with less data)</td></tr><tr>
+                        <td colspan="5">
+                            <div class="inner" style="display: none;">
+                                <h3>Description of route "/hackatum/hotels/searches/:searchId/offers.[:format]"</h3>
+                                <div class="method">Class: SearchController::compactResultsAction</div><div class="warning"><div class="doc">This route has a caching mechanism:</div>HotelDescriptions-Entities
+ are being cached for unlimited time by the secondlevelcache_memcached 
+and the rendered_entities table. If the search is hotel based.<br>This response includes an offer which is being cached for 2 hours by the offercache_memcached.<br><br>Returns the (remaining) cache lifetime of this request. The lifetime is being calculated dynamicly by the max<br>
+ cache time and the time elapsed since the creation of this search.<br>
+ A failed search or a search that's not finished is not being cached.<br>
+<br>
+ </div><div class="doc">Documentation:</div><table>
+                            <tbody><tr>
+                                <td class="desc"> Get Search Results 
+(optimized version with less data)
+
+ @route /hotels/searches/:searchId/offers(.:format)
+
+ @caching HotelDescriptions-Entities are being cached for unlimited time
+ by the secondlevelcache_memcached and the rendered_entities table. If 
+the search is hotel based.
+ @caching This response includes an offer which is being cached for 2 
+hours by the offercache_memcached.
+ @param CompactResultsRequest $request
+ @return JsonXmlResponseModel
+ @throws \Exception
+</td>
+                            </tr>
+                          </tbody></table><div class="doc">Parameters:</div><table><tbody><tr><th>Parameter</th><th>Description</th></tr><tr class="param"><td>display_roomcategory_names</td><td class="desc"> Should i display Room Category Strings
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>group_by_roomtype</td><td class="desc"> Should the results be ordered by room type first
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>searchId</td><td class="desc"> @Mapping(optional=false,type="integer")
+ @Validator({"name":"Int"})
+ @var int
+</td></tr><tr class="param"><td>offerUuid</td><td class="desc"> @Mapping(optional=true,type="string")
+ @Validator({"name":"Uuid"})
+ @var string
+</td></tr><tr class="param"><td>result_id</td><td class="desc"> If you want to retrieve only one specific result, you can specify its ID.
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>hotel_id</td><td class="desc"> @Mapping(optional=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>detail</td><td class="desc"> @todo check for usage - it seems property isn't used at all
+ @Mapping(optional=true,type="string")
+ @Validator({"name":"InArray", "options":{"haystack":{"map"}}})
+ @var string
+</td></tr><tr class="param"><td>summary_only</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>waitingSeconds</td><td class="desc"> @Mapping(optional=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>bounds</td><td class="desc"> @Mapping(ignore=true,type="\Geokit\Bounds")
+ @var Bounds
+</td></tr><tr class="param"><td>attributeFilter</td><td class="desc"> @Mapping(ignore=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>mealFilter</td><td class="desc"> @Mapping(ignore=true,type="integer")
+ @var int
+</td></tr><tr class="param"><td>sort_by</td><td class="desc"> @Mapping(optional=true,type="string")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "price_asc",
+      "price_desc",
+      "rating_asc",
+      "rating_desc",
+      "relevance_asc",
+      "relevance_desc",
+      "popularity_asc",
+      "popularity_desc",
+      "city_asc",
+      "city_desc",
+      "railwaystation_asc",
+      "railwaystation_desc",
+      "airport_asc",
+      "airport_desc",
+      "highway_asc",
+      "highway_desc",
+      "distance_asc",
+      "distance_desc",
+      "recommendation_asc"
+  }}})
+ @var string
+</td></tr><tr class="param"><td>stars</td><td class="desc"> Allows you to get only hotels with exactly this number of stars.
+ Allowed options: -1 to 7
+ You can also provide multiple values by comma-separating them: 0,1,2
+ When providing multiple values, the order in which they are provided is irrelevant.
+ 0,1,2 works exactly like 1,0,2
+
+ Providing a -1 results in a search for hotels without any classification (Database value = NULL)
+
+ Also, a -1 can be mixed with other numbers,
+ e.g. -1,0,1 would find any hotels with 0 or 1 stars and all hotels without a classification
+
+ @Mapping(optional=true,type="string")
+ @var string
+</td></tr><tr class="param"><td>stars_min</td><td class="desc"> Allows you to get only hotels with more or equal stars than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>rating_min</td><td class="desc"> Allows you to get only hotels which are rated equally or higher on average than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>price_min</td><td class="desc"> Allows you to get only results with more or equal than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>price_max</td><td class="desc"> Allows you to get only results with less or equal than the specified number
+
+ @Mapping(optional=true,type="integer")
+ @var integer
+</td></tr><tr class="param"><td>only_stay_included</td><td class="desc"> Allows you to get only offers which only include stay (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>breakfast_included</td><td class="desc"> Allows you to get only offers which include breakfast, half_board, full_board or all_inclusive (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_breakfast_included</td><td class="desc"> Allows you to get only offers which only include breakfast (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_half_board_included</td><td class="desc"> Allows you to get only offers which only include half_board (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_full_board_included</td><td class="desc"> Allows you to get only offers which only include full_board (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>only_all_inclusive_included</td><td class="desc"> Allows you to get only offers which only include all_inclusive (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>hotel_name</td><td class="desc"> Allows you to get only hotels with a part of the name matching the query
+
+ @Mapping(optional=true,type="string")
+ @var string
+</td></tr><tr class="param"><td>with_restaurant</td><td class="desc"> Allows you to get only offers from hotels which have a restaurant (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_internet</td><td class="desc"> Allows you to get only offers from hotels which provide an interwebs tube (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_gym</td><td class="desc"> Allows you to get only offers from hotels which have a gym (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_spa</td><td class="desc"> Allows you to get only offers from hotels which have a spa (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_parking</td><td class="desc"> Allows you to get only offers from hotels which have a parking place (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_pool</td><td class="desc"> Allows you to get only offers from hotels which have a swimming pool (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_wheelchair_accessible</td><td class="desc"> Allows you to get only offers from hotels which have the wheelchair accessibility (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_reception_24h</td><td class="desc"> Allows you to get only offers from hotels which have 24 hour reception (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_pets_allowed</td><td class="desc"> Allows you to get only offers from hotels which allow pets (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>with_babycare</td><td class="desc"> Allows you to get only offers from hotels which are notably children friendly (default: false)
+
+ @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>reference_distance_min</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>reference_distance_max</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>sw_lat</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>sw_lng</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>ne_lat</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>ne_lng</td><td class="desc"> @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>is_club_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_design_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_all_inclusive_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_family_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_castle_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_beach_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_wellness_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_winter_sport_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_sport_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_romantic_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_business_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>is_conference_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_hotel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_bed_breakfast</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_gasthaus_pension</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_hostel</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>in_apartment</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @var boolean
+</td></tr><tr class="param"><td>providers</td><td class="desc"> provider ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>c24_room_id</td><td class="desc"> Room Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>room_types</td><td class="desc"> Room Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>bed_types</td><td class="desc"> Bed Type Ids
+
+ @Mapping(optional=true,type="int[]")
+ @var int[]
+</td></tr><tr class="param"><td>cancellable</td><td class="desc"> @Mapping(optional=true,type="string[]")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "cancellable_available",
+      "cancellable_nocharge",
+      "cancellable_nocharge_untilcheckin",
+      "cancellable_not_available"
+  }}})
+ @var string[]
+</td></tr><tr class="param"><td>credit_card_required</td><td class="desc"> @Mapping(optional=true,type="boolean")
+ @Validator({"name":"Boolean"})
+ @var boolean
+</td></tr><tr class="param"><td>paymentTypes</td><td class="desc"> @Mapping(optional=true,type="string[]")
+ @Validator({"name":"InArray", "options":{
+  "haystack":{
+      "american_express",
+      "master",
+      "visa",
+      "invoice",
+      "prepaid",
+      "postpay"
+  }}})
+ @var string[]
+</td></tr><tr class="param"><td>cs_code</td><td class="desc"> @var string
+ @Mapping(optional=true,type="string")
+</td></tr><tr class="param default"><td>key</td><td class="desc"> Your API key
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param default"><td>page</td><td class="desc"> The current page we want items for.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param default"><td>per_page</td><td class="desc"> Items per page.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param"><td>full</td><td class="desc"> special flag to return all hotel descriptions with response
+
+ @Mapping(optional=true,type="bool")
+ @var bool
+</td></tr><tr class="param"><td>additional_information</td><td class="desc">
+ Same as $full.
+ It shows, how many hotels in this city or region. If hotel_name is 
+used, it will show, how many hotels are found in this city or region.
+ If there is no available hotels and hotel_name is used, API will return
+ the hotels, which you search.
+
+ Displays more informations for current request. Depending on request we
+ either need $full or $additional_information but we won't create a new
+ Trait wich contains $reference_lat, $reference_lng and $full. So we 
+just
+ ignore the other flag because we don't use it and hey, it's optional ;)
+
+ @Mapping(optional=true,type="bool")
+ @var bool
+</td></tr><tr class="param"><td>reference_lat</td><td class="desc"> Calculate the distance to point of interests if provided. For example
+ the distance to next airport.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr><tr class="param"><td>reference_lng</td><td class="desc"> Calculate the distance to point of interests if provided. For example
+ the distance to next airport.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true,type="float")
+ @Validator({"name":"Float"})
+ @var float
+</td></tr></tbody></table>    </div>
+                       </td>
+                     </tr><tr id="/hackatum/hotels/searches/:searchId[/:action].[:format]" class="or unused" onclick="showlayer(this)"><td class="icn-list"><span class="icn unused" title="@unused Not found in logfiles">❗</span></td><td></td><td><a class="star" href="#/hackatum/hotels/searches/:searchId[/:action].[:format]">🔗</a> /hackatum/hotels/searches/:searchId[/:action].[:format]</td><td>proxy-hackatum/hotel-search/search</td><td class="desc">Various Actions For Searches</td></tr><tr>
+                        <td colspan="5">
+                            <div class="inner">
+                                <h3>Description of route "/hackatum/hotels/searches/:searchId[/:action].[:format]"</h3>
+                                <div class="method">Class: SearchController::defaultAction</div><div class="doc">Documentation:</div><table>
+                            <tbody><tr>
+                                <td class="desc"> Various Actions For Searches
+
+ <b>Get Search Status</b>
+ @route /hotels/searches/:search_id(.:format)
+
+ The status of a search indicates whether it's finished or running and which of the providers that were requested
+ did already return results.
+ Also, as with every reply on a search, you get the searches ID and a list of available resources.
+
+
+ <b>Get Search Parameters</b>
+ @route /hotels/searches/{search_id}/parameters.{format}
+
+ Retrieve the parameters used to start a search
+
+
+ <b>Get resultsmap</b>
+ @route /hotels/searches/{search_id}/resultsmap.{format}
+
+
+ <b>Restart search</b>
+ @route /hotels/searches/{search_id}/restart.{format}
+
+ Searches expire after a certain time. This is indicated by a 205 Reset Content status code.
+ Searches can be restarted without providing the original parameters.
+
+
+ @param DefaultRequest $request
+ @return \Framework\View\Model\JsonXmlResponseModel
+</td>
+                            </tr>
+                          </tbody></table><div class="doc">Parameters:</div><table><tbody><tr><th>Parameter</th><th>Description</th></tr><tr class="param"><td>searchId</td><td class="desc"> @Validator({"name":"Int"})
+ @var int
+</td></tr><tr class="param default"><td>key</td><td class="desc"> Your API key
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param default"><td>page</td><td class="desc"> The current page we want items for.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param default"><td>per_page</td><td class="desc"> Items per page.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr></tbody></table>    </div>
+                       </td>
+                     </tr><tr>
+                            <th colspan="1" class="icn-list">  </th>
+                            <th colspan="4">Api\Controller\IndexController</th>
+                          </tr><tr><td colspan="5" class="classInfo"> <b>The check24 hotel API - Introduction</b>
+
+ <b>API Keys</b>
+ In order to use this API, you have to have a valid key. Such a key can be obtained free of charge here.
+ The key has to be passed as a parameter with all calls. If you provide no key or the key is invalid, the
+ server will return the status '401 Unauthorized'.
+
+ <b>Natural language and currencies</b>
+ Check24 serves the German speaking market. Thus, all descriptions are in German and all prices are in Euro.
+ In contrast, all machine-readable aspects are in English, like URLs, parameter names and tag names.
+ Error messages are in German, so they can be displayed without translation. The programmatic handling of errors
+ should rely on the HTTP status codes.
+
+ <b>Formats</b>
+ The API supports XML and JSON. The preferred format is specified with the last part of the URL: '.json' or '.xml'
+
+ <b>JSONP</b>
+ The API supports JSONP. Whenever a client requests s resource in JSON format and passes a 'callback' parameter, the
+ reply is wrapped into a function call with that name.
+ When using JSONP, the http status will always be 200, so the browser is inserting the reply into the DOM. Errors
+ can be identified by having only the key 'errors'.
+ Example: When the data in the reply is a hash '{"hello": "there"}' and the 'callback' parameter is set to
+ 'my_funct', the reply will be 'my_funct({"hello": "there"})'.
+</td></tr><tr id="/hackatum/ping[.:format]" class="or unused" onclick="showlayer(this)"><td class="icn-list"><span class="icn unused" title="@unused Not found in logfiles">❗</span></td><td></td><td><a class="star" href="#/hackatum/ping[.:format]">🔗</a> /hackatum/ping[.:format]</td><td>proxy-hackatum/ping</td><td class="desc">This can be used in order to test if the api is reachable.</td></tr><tr>
+                        <td colspan="5">
+                            <div class="inner">
+                                <h3>Description of route "/hackatum/ping[.:format]"</h3>
+                                <div class="method">Class: IndexController::defaultAction</div><div class="doc">Documentation:</div><table>
+                            <tbody><tr>
+                                <td class="desc"> This can be used in order to test if the api is reachable.
+ If it is reachable, the HTTP status of the reply will be 200 OK.
+
+ @route /ping(.:format)?key={api_key}
+
+ @param DefaultRequest $request [optional]
+ @return PingResponse
+</td>
+                            </tr>
+                          </tbody></table><div class="doc">Parameters:</div><table><tbody><tr><th>Parameter</th><th>Description</th></tr><tr class="param default"><td>key</td><td class="desc"> Your API key
+
+ @Mapping(optional=true)
+ @var string
+</td></tr><tr class="param default"><td>page</td><td class="desc"> The current page we want items for.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr><tr class="param default"><td>per_page</td><td class="desc"> Items per page.
+
+ We write this property with underscore because it's a typical GET
+ parameter and not directly mapped by the Routing.
+
+ @Mapping(optional=true)
+ @Validator({"name":"Int"})
+ @Validator({"name":"GreaterThan", "options":{"min":0}})
+ @var int
+</td></tr></tbody></table>    </div>
+                       </td>
+                     </tr></tbody></table></body></html>
