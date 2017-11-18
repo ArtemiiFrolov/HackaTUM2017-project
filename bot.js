@@ -1,18 +1,19 @@
+// require('dotenv-extended').load();
 var builder = require('botbuilder');
 var restify = require('restify');
 var Promise = require('bluebird');
 var request = require('request-promise').defaults({ encoding: null });
-var gvision = require('@google-cloud/vision');
+// var gvision = require('@google-cloud/vision');
 
 
 //=========================================================
 // Common Setup
 //=========================================================
 
-var vision = gvision({
-  projectId: 'hackatum-186320',
-  keyFilename: 'gcloud.json'
-});
+// var vision = gvision({
+//   projectId: 'hackatum-186320',
+//   keyFilename: 'gcloud.json'
+// });
 
 //=========================================================
 // Bot Setup
@@ -23,6 +24,8 @@ var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
   console.log('%s listening to %s', server.name, server.url);
 });
+
+console.log("APP_ID: " + process.env.MICROSOFT_APP_ID)
 
 // Create chat bot
 var connector = new builder.ChatConnector({
@@ -36,6 +39,7 @@ server.post('/api/messages', connector.listen());
 // Bots Dialogs
 //=========================================================
 
+<<<<<<< HEAD
 var bot = new builder.UniversalBot(connector, [
   function (session) {
       session.send("Launched");
@@ -50,6 +54,40 @@ var bot = new builder.UniversalBot(connector, [
       session.dialogData.partySize = results.response;
       session.send(`Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate} <br/>Party size: ${session.dialogData.partySize}`);
       session.endDialog();
+=======
+bot.dialog('/', function(session){
+  var msg = session.message;
+  if (msg.attachments.length) {
+    // Receive a message with attachments
+    var attachment = msg.attachments[0];
+    var fileDownload = checkRequiresToken(msg)
+          ? requestWithToken(attachment.contentUrl)
+          : request(attachment.contentUrl);
+
+    fileDownload.then(
+      function (image) {
+        console.log(`Attachment of ${attachment.contentType} type and size of ${image.length} bytes received.`)
+
+        // getLocation(image).then(response => {
+        //   console.log("Got response from google:")
+        //   console.log(response)
+        //   var reply = new builder.Message(session)
+        //     .text(`${response[0].landmarkAnnotations[0].description}`);
+        //   session.send(reply);
+        // }).catch(err => {
+        //   console.error(err);
+        // })
+      }
+    ).catch(
+      function (err) {
+        console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
+      }
+    );
+
+  } else {
+    // No attachments were sent
+    session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
+>>>>>>> origin/master
   }
 ]);
 /*
