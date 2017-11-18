@@ -7,8 +7,8 @@ var buildUrl = require('build-url');
 // 3. Departure Date -     –||–
 
 
-var result = WebUrlfromCity("Moskau", "20.11.2017", "21.11.2017");
-console.log( result );
+//var result = WebUrlfromCity("Moskau", "20.11.2017", "21.11.2017");
+//console.log( result );
 
 function WebUrlfromCity(CityName = '', ArrivalDate ='' ,DepartureDate = '', RoomConfig = '' ) {
 
@@ -40,10 +40,11 @@ function WebUrlfromCity(CityName = '', ArrivalDate ='' ,DepartureDate = '', Room
                 
               }
         });
-        
+        console.log("ASdAAAAAAAAAAAAAAAAAAAAAA"+SearchUrl)
         return SearchUrl;
 }
 
 function WebUrlfromLocation(Location) {
 
-}
+};
+exports.data = {WebUrlfromCity};

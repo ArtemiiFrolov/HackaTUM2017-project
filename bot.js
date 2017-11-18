@@ -5,11 +5,15 @@ const Promise = require('bluebird');
 const request = require('request-promise').defaults({ encoding: null });
 const gvision = require('@google-cloud/vision');
 const util = require('util');
-
+var another = require('./WebSearch');
+// import WebUrlfromCity from "./WebSearch"
 
 //=========================================================
 // Common Setup
 //=========================================================
+
+
+var city = ""
 
 let vision = gvision({
   projectId: 'hackatum-186320',
@@ -53,23 +57,23 @@ var bot = new builder.UniversalBot(connector, [
     session.dialogData.place = results.response.description
     session.dialogData.latitude = results.response.locations[0].latLng.latitude
     session.dialogData.longitude = results.response.locations[0].latLng.longitude
-
-
     session.dialogData.city =""
+
       googleMapsClient.reverseGeocode({
         latlng: [session.dialogData.latitude, session.dialogData.longitude],
         language: "de"
       }, function(err, response) {
         if (!err) {
           session.dialogData.city= response.json.results[0].address_components[3].long_name;
-          console.log("aaaaaaaaaaaaaaaaa"+session.dialogData.city)
+          city = session.dialogData.city
+          console.log("aaaaaaaaaaaaaaaaa"+util.inspect(response.json.results[0], false, null))
           session.beginDialog('askForPartySize');
         }
       });    
   },
   function (session, results) {
     session.dialogData.partySize = results.response
-    session.send(`Reservation confirmed. Поехали в : ${session.dialogData.place}, location: ${session.dialogData.latitude}  ${session.dialogData.longitude},
+    session.send(`Reservation confirmed. Let's go to : ${session.dialogData.place},
     city: ${session.dialogData.city} <br/>Party size: ${session.dialogData.partySize}`);
     session.endDialog()
   }
@@ -78,7 +82,9 @@ var bot = new builder.UniversalBot(connector, [
 // Dialog to ask for number of people in the party
 bot.dialog('askForPartySize', [
   function (session) {
-    builder.Prompts.text(session, "How many people are in your party?");
+    console.log(city+"+++++++++++++++++++++")
+    session.dialogData.surl = another.data.WebUrlfromCity(city)
+    builder.Prompts.text(session, `Here is a hotels for you in ${session.dialogData.city}. Here's a link ${session.dialogData.surl} -  Specify your date if you want `);
   },
   function (session, results) {
     session.endDialogWithResult(results);
@@ -89,7 +95,7 @@ var reply = "";
 bot.dialog('AskForPhoto',
   [
     function (session) {
-      builder.Prompts.attachment(session, "Send a photo, pidr");
+      builder.Prompts.attachment(session, "Send a photo");
     },
     function (session, results) {
       var attachments = results.response
@@ -143,6 +149,8 @@ function getLocation(data) {
   };
   return vision.landmarkDetection(image)
 }
+
+
 
 // Request file with Authentication Header
 var requestWithToken = function (url) {
