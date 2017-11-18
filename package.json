@@ -4,7 +4,9 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./ --out-dir build/ --ignore ./build,.gcloud.json,./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "bot": "npm run build && node build/bot.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,13 @@
     "@google/maps": "^0.4.5",
     "bluebird": "^3.5.1",
     "botbuilder": "^3.12.0",
+    "build-url": "^1.0.10",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "restify": "^6.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
   }
 }
