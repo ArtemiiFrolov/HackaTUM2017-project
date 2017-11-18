@@ -29,47 +29,101 @@ var connector = new builder.ChatConnector({
   appId: process.env.MICROSOFT_APP_ID,
   appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
-var bot = new builder.UniversalBot(connector);
+//var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 //=========================================================
 // Bots Dialogs
 //=========================================================
 
-bot.dialog('/', function(session){
-  var msg = session.message;
-  if (msg.attachments.length) {
-    // Receive a message with attachments
-    var attachment = msg.attachments[0];
-    var fileDownload = checkRequiresToken(msg)
-          ? requestWithToken(attachment.contentUrl)
-          : request(attachment.contentUrl);
-
-    fileDownload.then(
-      function (image) {
-        console.log(`Attachment of ${attachment.contentType} type and size of ${image.length} bytes received.`)
-
-        getLocation(image).then(response => {
-          console.log("Got response from google:")
-          console.log(response)
-          var reply = new builder.Message(session)
-            .text(`${response[0].landmarkAnnotations[0].description}`);
-          session.send(reply);
-        }).catch(err => {
-          console.error(err);
-        })
-      }
-    ).catch(
-      function (err) {
-        console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
-      }
-    );
-
-  } else {
-    // No attachments were sent
-    session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
+var bot = new builder.UniversalBot(connector, [
+  function (session) {
+      session.send("Launched");
+      session.beginDialog('AskForPhoto');
+  },
+  function (session, results) {
+    console.log("results2: " + results);
+      session.dialogData.reservationDate = results.response;
+      session.beginDialog('askForPartySize');
+  },
+  function (session, results) {
+      session.dialogData.partySize = results.response;
+      session.send(`Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate} <br/>Party size: ${session.dialogData.partySize}`);
+      session.endDialog();
   }
-})
+]);
+/*
+// Dialog to ask for a date and time
+bot.dialog('askForFoto', [
+  function (session) {
+      builder.Prompts.attachment(session, "Please send photo");
+  },
+  function (session, results) {
+      session.endDialogWithResult(results);
+  }
+]);*/
+
+// Dialog to ask for number of people in the party
+bot.dialog('askForPartySize', [
+  function (session) {
+      builder.Prompts.text(session, "How many people are in your party?");
+  },
+  function (session, results) {
+      session.endDialogWithResult(results);
+  }
+])
+
+
+
+
+
+var reply = "";
+
+bot.dialog('AskForPhoto', 
+[
+  function (session) {
+    builder.Prompts.attachment(session, "Send a photo, pidr");
+  },
+  function (session, results) {
+    var attachments = results.response
+    console.log(results);
+    if (attachments.length) {
+      // Receive a message with attachments
+      var attachment = attachments[0];
+      var fileDownload = request(attachment.contentUrl);
+
+      fileDownload.then(
+        function (image) {
+          console.log(`Attachment of ${attachment.contentType} type and size of ${image.length} bytes received.`)
+  
+          getLocation(image).then(response => {
+            console.log("Got response from google:")
+            console.log(response)
+            //reply = new builder.Message(session)
+             // .text(`${response[0].landmarkAnnotations[0].description}`);
+            reply = "Hello";
+            session.endDialogWithResult({
+              response: `${response[0].landmarkAnnotations[0].description}`
+            });
+            //session.send(reply);
+          }).catch(err => {
+            console.error(err);
+          })
+        }
+      ).catch(
+        function (err) {
+          console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
+        }
+      );
+  
+    } else {
+      // No attachments were sent
+      session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
+    }
+    console.log("reply: " + reply);
+  }
+])
+
 
 //=========================================================
 // Utils
