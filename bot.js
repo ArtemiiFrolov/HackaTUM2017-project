@@ -11,9 +11,13 @@ var another = require('./WebSearch');
 //=========================================================
 // Common Setup
 //=========================================================
+var today = new Date();
+var today_t = `${today.getDate()}.${today.getMonth()+1}.${today.getFullYear()}`
 
-
-var city = ""
+var tomorrow = new Date();
+tomorrow.setDate(today.getDate()+1);
+var tomorrow_t = `${tomorrow.getDate()}.${tomorrow.getMonth()+1}.${tomorrow.getFullYear()}`
+var userData={"city": "", "date_begin": today_t, "date_end":tomorrow_t}
 
 let vision = gvision({
   projectId: 'hackatum-186320',
@@ -31,10 +35,9 @@ let googleMapsClient = require('@google/maps').createClient({
 // Setup Restify Server
 let server = restify.createServer()
 server.listen(process.env.port || process.env.PORT || 3978, function () {
-  console.log('%s listening to %s', server.name, server.url)
+  
 })
 
-console.log("APP_ID: " + process.env.MICROSOFT_APP_ID)
 
 // Create chat bot
 var connector = new builder.ChatConnector({
@@ -50,8 +53,10 @@ server.post('/api/messages', connector.listen())
 
 var bot = new builder.UniversalBot(connector, [
   function (session) {
+    
     session.send("Launched")
     session.beginDialog('AskForPhoto')
+    
   },
   function (session, results) {
     session.dialogData.place = results.response.description
@@ -65,33 +70,35 @@ var bot = new builder.UniversalBot(connector, [
       }, function(err, response) {
         if (!err) {
           session.dialogData.city= response.json.results[0].address_components[3].long_name;
-          city = session.dialogData.city
-          console.log("aaaaaaaaaaaaaaaaa"+util.inspect(response.json.results[0], false, null))
-          session.beginDialog('askForPartySize');
+          userData.city = session.dialogData.city
+          
+          session.beginDialog('askForMoveInDate');
         }
       });    
   },
   function (session, results) {
-    session.dialogData.partySize = results.response
-    session.send(`Reservation confirmed. Let's go to : ${session.dialogData.place},
-    city: ${session.dialogData.city} <br/>Party size: ${session.dialogData.partySize}`);
+    session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+    
+    var temp = new Date(session.dialogData.reservationDate);
+    temp.setDate(session.dialogData.reservationDate.getDate()+1);
+    
+    userData.date_begin = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+    userData.date_end = `${temp.getDate()}.${temp.getMonth()+1}.${temp.getFullYear()}`
+    
+    session.send(`You want to see  ${session.dialogData.place} in
+    city: ${session.dialogData.city}? Move in date: ${userData.date_begin}`);
+    session.beginDialog('askForMoveOutDate');
+  },
+  function (session, results) {
+    session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+    userData.date_end = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+    session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+    session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.` );
     session.endDialog()
   }
 ])
 
-// Dialog to ask for number of people in the party
-bot.dialog('askForPartySize', [
-  function (session) {
-    console.log(city+"+++++++++++++++++++++")
-    session.dialogData.surl = another.data.WebUrlfromCity(city)
-    builder.Prompts.text(session, `Here is a hotels for you in ${session.dialogData.city}. Here's a link ${session.dialogData.surl} -  Specify your date if you want `);
-  },
-  function (session, results) {
-    session.endDialogWithResult(results);
-  }
-])
 
-var reply = "";
 bot.dialog('AskForPhoto',
   [
     function (session) {
@@ -99,7 +106,7 @@ bot.dialog('AskForPhoto',
     },
     function (session, results) {
       var attachments = results.response
-      console.log(results);
+     
       if (attachments.length) {
         // Receive a message with attachments
         var attachment = attachments[0];
@@ -107,36 +114,56 @@ bot.dialog('AskForPhoto',
 
         fileDownload.then(
           function (image) {
-            console.log(`Attachment of ${attachment.contentType} type and size of ${image.length} bytes received.`)
+            
 
             getLocation(image).then(response => {
-              console.log("Got response from google:")
-              console.log(response[0].landmarkAnnotations[0])
-              //reply = new builder.Message(session)
-              // .text(`${response[0].landmarkAnnotations[0].description}`);
-              reply = "Hello";
+              
               session.endDialogWithResult({
                 response: response[0].landmarkAnnotations[0]
-              });
-              //session.send(reply);
+              });             
             }).catch(err => {
               console.error(err);
             })
           }
         ).catch(
           function (err) {
-            console.log('Error downloading attachment:', { statusCode: err.statusCode, message: err.response.statusMessage });
+            
           }
           );
 
       } else {
         // No attachments were sent
+        
         session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
+        session.endDialogWithResult({
+          response: response[0].landmarkAnnotations[0]
+        });
       }
-      // console.log("reply: " + reply);
+
     }
   ])
 
+bot.dialog('askForMoveInDate', [
+    function (session) {   
+      
+      session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+      builder.Prompts.time(session, `Here is a hotels for you in ${userData.city}. Here's a link ${session.dialogData.surl}.  Specify date of move-in if you want `);
+    },
+    function (session, results) {
+      session.endDialogWithResult(results);
+    }
+  ])
+bot.dialog('askForMoveOutDate', [
+    function (session) {    
+      session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+      builder.Prompts.time(session, `Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.  
+      Specify date of move-out if you want `);
+    },
+    function (session, results) {
+      session.endDialogWithResult(results);
+    }
+  ])
+  
 
 //=========================================================
 // Utils
