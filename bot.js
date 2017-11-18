@@ -54,19 +54,23 @@ var bot = new builder.UniversalBot(connector, [
     session.dialogData.latitude = results.response.locations[0].latLng.latitude
     session.dialogData.longitude = results.response.locations[0].latLng.longitude
 
-    googleMapsClient.reverseGeocode({
-      latlng: [session.dialogData.latitude, session.dialogData.longitude]
-    }, (err, response) => {
-      if (!err) {
-        console.log(util.inspect(response.json.results, false, null));
-      }
-    })
 
-    session.beginDialog('askForPartySize');
+    session.dialogData.city =""
+      googleMapsClient.reverseGeocode({
+        latlng: [session.dialogData.latitude, session.dialogData.longitude],
+        language: "de"
+      }, function(err, response) {
+        if (!err) {
+          session.dialogData.city= response.json.results[0].address_components[3].long_name;
+          console.log("aaaaaaaaaaaaaaaaa"+session.dialogData.city)
+          session.beginDialog('askForPartySize');
+        }
+      });    
   },
   function (session, results) {
     session.dialogData.partySize = results.response
-    session.send(`Reservation confirmed. Поехали в : ${session.dialogData.place}, location: ${session.dialogData.latitude}  ${session.dialogData.longitude}<br/>Party size: ${session.dialogData.partySize}`)
+    session.send(`Reservation confirmed. Поехали в : ${session.dialogData.place}, location: ${session.dialogData.latitude}  ${session.dialogData.longitude},
+    city: ${session.dialogData.city} <br/>Party size: ${session.dialogData.partySize}`);
     session.endDialog()
   }
 ])
