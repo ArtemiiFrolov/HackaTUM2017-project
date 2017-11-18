@@ -2,17 +2,17 @@ var builder = require('botbuilder');
 var restify = require('restify');
 var Promise = require('bluebird');
 var request = require('request-promise').defaults({ encoding: null });
-var gvision = require('@google-cloud/vision');
+// var gvision = require('@google-cloud/vision');
 
 
 //=========================================================
 // Common Setup
 //=========================================================
 
-var vision = gvision({
-  projectId: 'hackatum-186320',
-  keyFilename: 'gcloud.json'
-});
+// var vision = gvision({
+//   projectId: 'hackatum-186320',
+//   keyFilename: 'gcloud.json'
+// });
 
 //=========================================================
 // Bot Setup
@@ -49,15 +49,15 @@ bot.dialog('/', function(session){
       function (image) {
         console.log(`Attachment of ${attachment.contentType} type and size of ${image.length} bytes received.`)
 
-        getLocation(image).then(response => {
-          console.log("Got response from google:")
-          console.log(response)
-          var reply = new builder.Message(session)
-            .text(`${response[0].landmarkAnnotations[0].description}`);
-          session.send(reply);
-        }).catch(err => {
-          console.error(err);
-        })
+        // getLocation(image).then(response => {
+        //   console.log("Got response from google:")
+        //   console.log(response)
+        //   var reply = new builder.Message(session)
+        //     .text(`${response[0].landmarkAnnotations[0].description}`);
+        //   session.send(reply);
+        // }).catch(err => {
+        //   console.error(err);
+        // })
       }
     ).catch(
       function (err) {
