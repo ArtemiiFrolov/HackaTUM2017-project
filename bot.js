@@ -4,7 +4,10 @@ var restify = require('restify');
 var Promise = require('bluebird');
 var request = require('request-promise').defaults({ encoding: null });
 var gvision = require('@google-cloud/vision');
-
+const util = require('util');
+var googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyDiasgPX5UdjnWlfTflCdl0GqJj7bearm4'
+});
 
 //=========================================================
 // Common Setup
@@ -45,17 +48,35 @@ var bot = new builder.UniversalBot(connector, [
       session.beginDialog('AskForPhoto');
   },
   function (session, results) {
-    console.log("results2: " + results);
-      session.dialogData.reservationDate = results.response;
+    //console.log("results2: " + results);
+      //session.dialogData.reservationDate = results.response.description;
+      
+      
+      session.dialogData.place = results.response.description;
+      session.dialogData.latitude = results.response.locations[0].latLng.latitude;
+      session.dialogData.longitude = results.response.locations[0].latLng.longitude;
+      // session.dialogData.geo = googleMapsClient.reverseGeocode({
+      //   latlng: [session.dialogData.latitude, session.dialogData.longitude],
+      // })
+
+      googleMapsClient.reverseGeocode({
+        latlng: [session.dialogData.latitude, session.dialogData.longitude]
+      }, function(err, response) {
+        if (!err) {
+          console.log(util.inspect(response.json.results, false, null));
+        }
+      });
+
+
+     // console.log(util.inspect(session.dialogData.geo, false, null))
       session.beginDialog('askForPartySize');
   },
   function (session, results) {
       session.dialogData.partySize = results.response;
-      session.send(`Reservation confirmed. Reservation details: <br/>Date/Time: ${session.dialogData.reservationDate} <br/>Party size: ${session.dialogData.partySize}`);
+      session.send(`Reservation confirmed. Поехали в : ${session.dialogData.place}, location: ${session.dialogData.latitude}  ${session.dialogData.longitude}<br/>Party size: ${session.dialogData.partySize}`);
       session.endDialog();
   }
 ]);
-
 
 // Dialog to ask for number of people in the party
 bot.dialog('askForPartySize', [
@@ -92,12 +113,12 @@ bot.dialog('AskForPhoto',
   
           getLocation(image).then(response => {
             console.log("Got response from google:")
-            console.log(response)
+            console.log(response[0].landmarkAnnotations[0])
             //reply = new builder.Message(session)
              // .text(`${response[0].landmarkAnnotations[0].description}`);
             reply = "Hello";
             session.endDialogWithResult({
-              response: `${response[0].landmarkAnnotations[0].description}`
+              response: response[0].landmarkAnnotations[0]
             });
             //session.send(reply);
           }).catch(err => {
@@ -114,7 +135,7 @@ bot.dialog('AskForPhoto',
       // No attachments were sent
       session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
     }
-    console.log("reply: " + reply);
+   // console.log("reply: " + reply);
   }
 ])
 
