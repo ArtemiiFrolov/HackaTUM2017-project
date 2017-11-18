@@ -1,4 +1,4 @@
-require('dotenv-extended').load();
+// require('dotenv-extended').load();
 var builder = require('botbuilder');
 var restify = require('restify');
 var Promise = require('bluebird');
