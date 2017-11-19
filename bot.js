@@ -71,6 +71,44 @@ var bot = new builder.UniversalBot(connector, [
     session.beginDialog('AskForPhoto')
     
   }
+  // function (session, results) {
+  //   session.dialogData.place = results.response.description
+  //   session.dialogData.latitude = results.response.locations[0].latLng.latitude
+  //   session.dialogData.longitude = results.response.locations[0].latLng.longitude
+  //   session.dialogData.city =""
+
+  //     googleMapsClient.reverseGeocode({
+  //       latlng: [session.dialogData.latitude, session.dialogData.longitude],
+  //       language: "de"
+  //     }, function(err, response) {
+  //       if (!err) {
+  //         session.dialogData.city= response.json.results[0].address_components[3].long_name;
+  //         userData.city = session.dialogData.city
+          
+  //         session.beginDialog('askForMoveInDate');
+  //       }
+  //     });    
+  // },
+  // function (session, results) {
+  //   session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+    
+  //   var temp = new Date(session.dialogData.reservationDate);
+  //   temp.setDate(session.dialogData.reservationDate.getDate()+1);
+    
+  //   userData.date_begin = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+  //   userData.date_end = `${temp.getDate()}.${temp.getMonth()+1}.${temp.getFullYear()}`
+    
+  //   session.send(`You want to see  ${session.dialogData.place} in
+  //   city: ${session.dialogData.city}? Move in date: ${userData.date_begin}`);
+  //   session.beginDialog('askForMoveOutDate');
+  // },
+  // function (session, results) {
+  //   session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+  //   userData.date_end = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+  //   session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+  //   session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.` );
+  //   session.endDialog()
+  // }
 ])
 TIPrompt.init(builder, bot)
 
@@ -131,6 +169,9 @@ bot.dialog('AskForPhoto', [
 
 bot.dialog('mainMenu', [
   function(session){
+      session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+      session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.` );
+      
       builder.Prompts.choice(session, "Main Menu:", menuItems, { listStyle: builder.ListStyle.button });
   },
   function(session, results){
@@ -162,7 +203,7 @@ bot.dialog('askForMoveInDate', [
       userData.date_begin = `${dateStart.getDate()}.${dateStart.getMonth()+1}.${dateStart.getFullYear()}`
       userData.date_end = `${dateEnd.getDate()}.${dateEnd.getMonth()+1}.${dateEnd.getFullYear()}`
       
-      session.send(`You changed move in date to ${userData.date_begin}.`);
+      session.send(`You changed move in date to ${dateStart}.`);
       session.replaceDialog("mainMenu");
     }
   ])
@@ -187,8 +228,16 @@ bot.dialog('askForMoveOutDate', [
       //userData.date_begin = `${dateStart.getDate()}.${dateStart.getMonth()+1}.${dateStart.getFullYear()}`
       userData.date_end = `${dateEnd.getDate()}.${dateEnd.getMonth() + 1}.${dateEnd.getFullYear()}`
       
-      session.send(`You changed move out date to ${userData.date_end}.`);
+      session.send(`You changed move out date to ${dateEnd}.`);
       session.replaceDialog("mainMenu");
+      
+      //session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+      //userData.date_end = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+      // session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+      // session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.` );
+      // session.endDialog()
+
+      //session.endDialogWithResult(results);
     }
   ])
   
