@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./ --out-dir build/ --ignore ./build,.gcloud.json,./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "bot": "npm run build && node build/bot.js"
+    "bot": "npm run build && node build/bot.js",
+    "start" : "npm run bot"
   },
   "repository": {
     "type": "git",
