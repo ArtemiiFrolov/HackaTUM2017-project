@@ -9,6 +9,7 @@ var another = require('./WebSearch');
 var hotelsRequester = require('./HotelRequester');
 
 import TIPrompt from "./TIPrompt"
+import Weather from "./Weather"
 
 //=========================================================
 // Common Setup
@@ -71,7 +72,7 @@ var menuItems = {
 var bot = new builder.UniversalBot(connector, [
   function (session) {
     
-    session.send("Launched")
+    session.send("Hi, my name is Check24 Hotel Bot")
     session.beginDialog('AskForPhoto')
     
   }
@@ -81,10 +82,10 @@ TIPrompt.init(builder, bot)
 bot.dialog('AskForPhoto', [
   function (session, args) {
     if(args && args.reprompt){
-      builder.Prompts.TIPrompt(session, "Couldn't recognise the landmark, can you take another photo?");
+      builder.Prompts.TIPrompt(session, "Couldn't recognise the location, can you take another photo?");
     }
     else{
-      builder.Prompts.TIPrompt(session, "Send a photo");
+      builder.Prompts.TIPrompt(session, "Send me the photo of the location you want to go and I will find the best hotels for you nearby :)");
     }
   },
   function (session, results) {
@@ -141,10 +142,17 @@ bot.dialog('AskForPhoto', [
 
 bot.dialog('mainMenu', [
   function(session){
-      session.conversationData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
-      session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.conversationData.surl}.` );
+    
+    Weather.forecast(session.conversationData.latitude,
+      session.conversationData.longitude,
+      userData.date_begin, function(weatherEntry) {
+        session.conversationData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+        var niceDate = weatherEntry.maxTemperatureDate.split('-').reverse().join('.');
+        session.send(`The best weather in ${userData.city} is ${Math.floor(weatherEntry.maxTemperature)}℃ on ${niceDate}.\nHere is the selection of hotels to stay in from ${userData.date_begin} to ${userData.date_end}.\n You can book it here: ${session.conversationData.surl}.` );
+        
+        builder.Prompts.choice(session, "Useful commands", menuItems, { listStyle: builder.ListStyle.button });
+      });
       
-      builder.Prompts.choice(session, "Main Menu:", menuItems, { listStyle: builder.ListStyle.button });
   },
   function(session, results){
       if(results.response){
@@ -157,7 +165,7 @@ bot.dialog('askForMoveInDate', [
     function (session) {
       
       //session.conversationData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
-      builder.Prompts.time(session, `Your current move in date is ${userData.date_begin}. Which date is more comfortable for you?`);
+      builder.Prompts.time(session, `Your current move-in date is ${userData.date_begin}. Which date is more comfortable for you?`);
     },
     function (session, results) {
       if (!results.response) {
@@ -181,7 +189,7 @@ bot.dialog('askForMoveInDate', [
   ])
 bot.dialog('askForMoveOutDate', [
     function (session) {
-      builder.Prompts.time(session, `Your current move out date is ${userData.date_end}. Which date is more comfortable for you?`);
+      builder.Prompts.time(session, `Your current move-out date is ${userData.date_end}. Which date is more comfortable for you?`);
     },
     function (session, results) {
       if (!results.response) {
@@ -223,9 +231,6 @@ bot.dialog('showAvailableHotels', [
                       .images([
                           builder.CardImage.create(session, hotels[i].image_url)
                       ])
-        // .buttons([
-        //     builder.CardAction.openUrl(session, 'https://azure.microsoft.com/en-us/services/storage/', 'Learn More')
-        // ])
         )
       }
       var reply = new builder.Message(session)

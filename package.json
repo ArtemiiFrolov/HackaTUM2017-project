@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./ --out-dir build/ --ignore ./build,.gcloud.json,./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "bot": "npm run build && node build/bot.js",
-    "start" : "npm install && npm run bot"
+    "start": "npm install && npm run bot"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,8 @@
     "bluebird": "^3.5.1",
     "botbuilder": "^3.12.0",
     "build-url": "^1.0.10",
+    "moment": "^2.19.2",
+    "openweathermap-js": "^1.0.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "restify": "^6.3.2"
