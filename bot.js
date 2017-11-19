@@ -6,7 +6,8 @@ const request = require('request-promise').defaults({ encoding: null });
 const gvision = require('@google-cloud/vision');
 const util = require('util');
 var another = require('./WebSearch');
-// import WebUrlfromCity from "./WebSearch"
+
+import TIPrompt from "./TIPrompt"
 
 //=========================================================
 // Common Setup
@@ -97,49 +98,25 @@ var bot = new builder.UniversalBot(connector, [
     session.endDialog()
   }
 ])
-
+TIPrompt.init(builder, bot)
 
 bot.dialog('AskForPhoto',
   [
     function (session) {
-      builder.Prompts.attachment(session, "Send a photo");
+      builder.Prompts.TIPrompt(session, "Send a photo");
     },
     function (session, results) {
-      var attachments = results.response
-     
-      if (attachments.length) {
-        // Receive a message with attachments
-        var attachment = attachments[0];
-        var fileDownload = request(attachment.contentUrl);
-
-        fileDownload.then(
-          function (image) {
-            
-
-            getLocation(image).then(response => {
-              
-              session.endDialogWithResult({
-                response: response[0].landmarkAnnotations[0]
-              });             
-            }).catch(err => {
-              console.error(err);
-            })
-          }
-        ).catch(
-          function (err) {
-            
-          }
-          );
-
-      } else {
-        // No attachments were sent
-        
-        session.send("You sent %s which was %d characters", session.message.text, session.message.text.length);
-        session.endDialogWithResult({
-          response: response[0].landmarkAnnotations[0]
-        });
-      }
-
+      results.response.promisedImage.then(image => {
+        getLocation(image).then(response => {
+          session.endDialogWithResult({
+            response: response[0].landmarkAnnotations[0]
+          });            
+        }).catch(err => {
+          console.error(err);
+        })
+      }).catch(err => {
+        console.log(err)
+      });
     }
   ])
 
