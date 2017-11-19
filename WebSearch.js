@@ -22,7 +22,7 @@ function WebUrlfromCity(CityName = '', ArrivalDate ='' ,DepartureDate = '', Room
     // var DepartureDate = '20.11.2017'; // date only with points
     // var RoomConfig = '';
 
-    var SearchUrl = buildUrl('https://hotel.check24.de', {
+    var SearchUrl = buildUrl('https://m.hotel.check24.de', {
         
             queryParams: {
                 hotel_name_filter: 'yes',

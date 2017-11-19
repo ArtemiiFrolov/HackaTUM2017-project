@@ -61,6 +61,9 @@ var menuItems = {
   },
   "Change move out date": {
       item: "askForMoveOutDate"
+  },
+  "Show available options": {
+      item: "showAvailableHotels"
   }
 }
 
@@ -240,6 +243,41 @@ bot.dialog('askForMoveOutDate', [
       //session.endDialogWithResult(results);
     }
   ])
+
+  
+bot.dialog('showAvailableHotels', [
+  function (session) {
+    builder.Prompts.time(session, `Your current move out date is ${userData.date_end}. Which date is more comfortable for you?`);
+  },
+  function (session, results) {
+    if (!results.response) {
+      return;
+    }
+
+    var dateEnd = builder.EntityRecognizer.resolveTime([results.response])
+    if (!dateEnd) {
+      session.replaceDialog('askForMoveOutDate');
+    }
+    session.dialogData.reservationDate = dateEnd;
+  
+    var dateStart = new Date(dateStart);
+    dateStart.setDate(dateStart.getDate()+1);
+    
+    //userData.date_begin = `${dateStart.getDate()}.${dateStart.getMonth()+1}.${dateStart.getFullYear()}`
+    userData.date_end = `${dateEnd.getDate()}.${dateEnd.getMonth() + 1}.${dateEnd.getFullYear()}`
+    
+    session.send(`You changed move out date to ${dateEnd}.`);
+    session.replaceDialog("mainMenu");
+    
+    //session.dialogData.reservationDate = builder.EntityRecognizer.resolveTime([results.response]);
+    //userData.date_end = `${session.dialogData.reservationDate.getDate()}.${session.dialogData.reservationDate.getMonth()+1}.${session.dialogData.reservationDate.getFullYear()}`
+    // session.dialogData.surl = another.data.WebUrlfromCity(userData.city, userData.date_begin, userData.date_end)
+    // session.send(`Here is a hotels for you in ${userData.city} from ${userData.date_begin} to ${userData.date_end}  Here's a link ${session.dialogData.surl}.` );
+    // session.endDialog()
+
+    //session.endDialogWithResult(results);
+  }
+])
   
 
 //=========================================================
