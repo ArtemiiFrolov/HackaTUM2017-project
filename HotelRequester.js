@@ -39,6 +39,7 @@ function getAllResults(callback) {
             for (var i = 0; i < parsed.search.results.length; i++) { // var result in parsed.search.results) {
                 if (!parsed.search.results[i].name
                     || !parsed.search.results[i].city
+                    || !parsed.search.results[i].currency
                     || !parsed.search.results[i].price){
                     console.log("result doesn't contain name,city,price." + parsed.search.results[i]);
                     continue;
@@ -46,6 +47,8 @@ function getAllResults(callback) {
                 hotels.push({
                     name: parsed.search.results[i].name,
                     city: parsed.search.results[i].city,
+                    price: parsed.search.results[i].price,
+                    currency: parsed.search.results[i].currency,
                     image_url: parsed.search.results[i].image_url
                 });
             }
